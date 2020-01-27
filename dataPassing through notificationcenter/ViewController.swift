@@ -1,20 +1,42 @@
-//
-//  ViewController.swift
-//  dataPassing through notificationcenter
-//
-//  Created by A RAJU on 11/22/19.
-//  Copyright © 2019 A RAJU. All rights reserved.
-//
+
 
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var label: UILabel!
+    
+    @IBOutlet weak var textfield1: UITextField!
+    
+    var dict1 = [String:Any]()
+    
+    var dictionary = [String]()
+  
+    @IBAction func button(_ sender: Any) {
+        
+       
+        
+    
+        let firstVC = storyboard?.instantiateViewController(withIdentifier: "firstVC") as! FirstViewController
+        present(firstVC , animated: true, completion: nil)
+        
+      
+    }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+       
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(MsgShow(naga:)), name: NSNotification.Name("onBtnTap"), object: nil)
+//         NotificationCenter.default.addObserver(self, selector: #selector(dataPassing(value: )), name: NSNotification.Name("onBtnTap"), object: nil)
+//
     }
 
-
+    @objc func MsgShow(naga:Notification){
+        var data = naga.userInfo
+        
+        label.text = naga.userInfo!["firstName"]as? String
+        
+    }
 }
 
